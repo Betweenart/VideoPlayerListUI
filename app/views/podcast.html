@@ -8,7 +8,7 @@
 
 <hr>
 
-<div class="row">
+<div class="row podHeader">
   <h2 class="podTitle">{{podCast.title}}</h2>
 
   <h4 class="podDescription">{{podCast.description}}</h4>
@@ -18,8 +18,10 @@
   <div class="col-lg-6 podVideoListWrap">
     <button class="podListButton podListButtonUp" ng-click="videoList.moveUp()">{{podListButtonUpName}}</button>
     <ul class="podVideoList">
-      <li id="video{{$index}}" ng-repeat="video in podCast.videoList"><strong>{{$index}}</strong>, {{video.title}} |
-        {{video.date}}
+      <li id="video{{$index}}" ng-repeat="video in podCast.entries">
+        <div class="number">{{$index+1}}</div>
+        <strong>{{video.title | limitTo: 90}}</strong><br>
+        <small>{{video.publishedDate | date:'yyyy-MM-dd HH:mm:ss'}}</small>
       </li>
     </ul>
     <button class="podListButton podListButtonDown" ng-click="videoList.moveUp()">{{podListButtonDownName}}</button>
