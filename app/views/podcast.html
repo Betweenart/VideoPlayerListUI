@@ -6,23 +6,27 @@
   </p>
 </header>
 
-<div class="row">
-  <h4 class="podTitle">{{podCast.title}}</h4>
+<hr>
 
-  <div class="podDescription">{{podCast.description}}</div>
+<div class="row">
+  <h2 class="podTitle">{{podCast.title}}</h2>
+
+  <h4 class="podDescription">{{podCast.description}}</h4>
 </div>
 
 <div class="row">
-  <div class="col-lg-6">
-    <button class="podListButton podListButtonUp" ng-model="podListButtonUp">{{podListButtonUpName}}</button>
-    <ul class="podVideoList" ng-repeat="video in podCast.videoList">
-      <li>{{$index}}, {{video.title}}, {{video.date}}</li>
+  <div class="col-lg-6 podVideoListWrap">
+    <button class="podListButton podListButtonUp" ng-click="videoList.moveUp()">{{podListButtonUpName}}</button>
+    <ul class="podVideoList">
+      <li id="video{{$index}}" ng-repeat="video in podCast.videoList"><strong>{{$index}}</strong>, {{video.title}} |
+        {{video.date}}
+      </li>
     </ul>
-    <button class="podListButton podListButtonDown"  ng-model="podListButtonDown">{{podListButtonDownName}}</button>
+    <button class="podListButton podListButtonDown" ng-click="videoList.moveUp()">{{podListButtonDownName}}</button>
   </div>
 
   <div class="col-lg-6">
     <video id="podVideoPlayer" class="podVideoPlayer"></video>
-    <div class="podVideoDescription">{{podVideoDescription}}</div>
+    <div class="podVideoDescription">{{activeVideoDescription}}</div>
   </div>
 </div>

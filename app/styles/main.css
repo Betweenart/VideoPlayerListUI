@@ -7,6 +7,8 @@
 
 body {
   padding: 0;
+  background: #212426;
+  color: ghostwhite;
 }
 
 /* Custom page header */
@@ -34,11 +36,92 @@ body {
   margin: 30px 0;
 }
 
-h4{
+h4 {
   margin-top: 1.3em;
 }
 
+/* UI LIST */
+.podListButton {
+  width: 100%;
+  padding: 0.75em 1em;
+  background: ghostwhite;
+  border: 1px solid #222;
+  border-radius: 0.375em;
+  color: dimgrey;
+  transition: 0.1s ease-in-out;
+  outline: none;
+}
 
+.podListButton:hover {
+  background: cornflowerblue;
+  border: 1px solid #222;
+  color: ghostwhite;
+}
+
+.podListButtonUp {
+  border-radius: 0.375em 0.375em 0 0;
+}
+
+.podListButtonDown {
+  border-radius: 0 0 0.375em 0.375em;
+}
+
+.podVideoListWrap {
+  margin-bottom: 1em;
+}
+
+.podVideoList {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: dimgrey;
+  border-left: 1px solid #222;
+  border-right: 1px solid #222;
+}
+
+.podVideoList li {
+  transition: 0.1s ease-in-out;
+  outline: none;
+  list-style: none;
+  padding: 0.75em 1em;
+  background: ghostwhite;
+  border-bottom: 1px solid #222;
+  cursor: pointer;
+}
+
+.podVideoList li:last-child {
+  border-bottom: none;
+}
+
+.podVideoList li:hover,
+.podVideoList li.active {
+  background: cornflowerblue;
+  color: ghostwhite;
+}
+
+.podVideoList li.playing {
+  background: limegreen;
+  color: ghostwhite;
+}
+
+.podVideoList li.playing:hover {
+  background: greenyellow;
+  color: white;
+}
+
+/* VIDEO PLAYER */
+.podVideoPlayer {
+  width: 100%;
+  height: auto;
+  background: #111;
+}
+
+.podVideoDescription {
+  width: 100%;
+  background: #111;
+  color: lightgray;
+  padding: 0.75em 1em;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -53,10 +136,12 @@ h4{
     padding-left: 0;
     padding-right: 0;
   }
+
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;

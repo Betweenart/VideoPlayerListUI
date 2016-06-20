@@ -2,16 +2,15 @@
 
 /**
  * @ngdoc function
- * @name videoPlayerListUiApp.controller:MainCtrl
+ * @name videoPlayerListUiApp.controller:PodCastCtrl
  * @description
- * # MainCtrl
+ * # PodCastCtrl
  * Controller of the videoPlayerListUiApp
  */
 angular.module('videoPlayerListUiApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('PodCastCtrl', function ($scope) {
     $scope.podListButtonUpName = 'Scroll Up';
     $scope.podListButtonDownName = 'Scroll Down';
-
     // TODO load from rss feed
     $scope.podCast = {
       title: 'PodCast Title',
@@ -25,5 +24,10 @@ angular.module('videoPlayerListUiApp')
         {title: 'Pod Video 06', src: 'http://video6', date: Date.now() + 6, description: 'amazing video from ... 06'}
       ]
     };
+
+    $scope.activeVideoDescription = 'description of video here';
+
+    // video list
+    angular.element($scope.video1).addClass('class', 'active');
 
   });
