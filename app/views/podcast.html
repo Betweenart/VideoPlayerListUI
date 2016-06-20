@@ -20,7 +20,7 @@
     <ul class="podVideoList">
       <li id="video{{$index}}" ng-repeat="video in podCast.entries">
         <div class="number">{{$index+1}}</div>
-        <strong>{{video.title | limitTo: 90}}</strong><br>
+        <strong>{{video.title | limitTo: 90}}{{video.title.length > 90 ? '&hellip;' : ''}}</strong><br>
         <small>{{video.publishedDate | date:'yyyy-MM-dd HH:mm:ss'}}</small>
       </li>
     </ul>
