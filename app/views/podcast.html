@@ -1,22 +1,12 @@
-<header class="row">
-  <h1>RSS Video PodCast Demo</h1>
-
-  <p class="lead">
-    RSS feed of PodCast video UI list for smart tv
-  </p>
-</header>
-
-<hr>
-
-<div class="row podHeader">
+<header class="row podHeader">
   <h2 class="podTitle">{{podCast.title}}</h2>
 
   <h4 class="podDescription">{{podCast.description}}</h4>
-</div>
+</header>
 
 <div class="row">
   <div class="col-lg-6 podVideoListWrap">
-    <button class="podListButton podListButtonUp" ng-click="videoList.moveUp()">{{podListButtonUpName}}</button>
+    <a class="podListButton podListButtonUp" ng-click="videoList.moveUp()">{{podListButtonUpName}}</a>
     <ul class="podVideoList">
       <li id="video{{$index}}" ng-repeat="video in podCast.entries">
         <div class="number">{{$index+1}}</div>
@@ -24,7 +14,7 @@
         <small>{{video.publishedDate | date:'yyyy-MM-dd HH:mm:ss'}}</small>
       </li>
     </ul>
-    <button class="podListButton podListButtonDown" ng-click="videoList.moveUp()">{{podListButtonDownName}}</button>
+    <a class="podListButton podListButtonDown" ng-click="videoList.moveUp()">{{podListButtonDownName}}</a>
   </div>
 
   <div class="col-lg-6">

@@ -1,23 +1,23 @@
 <header class="row">
   <h1>RSS Video PodCast Info</h1>
   <p class="lead">
-    WHat it is and what is does...
+    What it is and what is does...
   </p>
 </header>
 
 <div class="row">
   <h4>Main Functionality</h4>
   <ul>
-    <li>Loading rss feed with video PodCast</li>
-    <li>Playing Videos chosen from list</li>
-    <li>Dynamic list, controlled with keys</li>
+    <li ng-repeat="opt in options">{{opt}}</li>
   </ul>
 
   <h4>Build with</h4>
-  <p>
-    AngularJS, Google Feed API, Bootstrap, Grunt, Bower, NPM
-  </p>
+  <ul>
+    <li ng-repeat="lib in libs">{{lib}}</li>
+  </ul>
 
   <h4>Testing</h4>
-  <p>JS Hint, Karma</p>
+  <ul>
+    <li ng-repeat="test in tests">{{test}}</li>
+  </ul>
 </div>

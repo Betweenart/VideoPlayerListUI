@@ -46,6 +46,8 @@ h4 {
 
 /* UI LIST */
 .podListButton {
+  display: block;
+  text-align: center;
   width: 100%;
   padding: 0.75em 1em;
   background: ghostwhite;
@@ -54,12 +56,14 @@ h4 {
   color: dimgrey;
   transition: 0.1s ease-in-out;
   outline: none;
+  cursor: pointer;
 }
 
 .podListButton:hover {
   background: cornflowerblue;
   border: 1px solid #222;
   color: ghostwhite;
+  text-decoration: none;
 }
 
 .podListButtonUp {

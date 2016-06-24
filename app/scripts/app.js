@@ -22,7 +22,7 @@ angular
       .when('/', {
         templateUrl: 'views/podcast.html',
         controller: 'PodCastCtrl',
-        controllerAs: 'PodCast'
+        controllerAs: 'podCast'
       })
       .when('/about', {
         templateUrl: 'views/about.html',

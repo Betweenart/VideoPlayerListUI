@@ -8,7 +8,9 @@
  * Controller of the videoPlayerListUiApp
  */
 angular.module('videoPlayerListUiApp')
-  .controller('PodCastCtrl', function ($scope, PodCastList, $log) {
+  .controller('PodCastCtrl', function ($rootScope, $scope, PodCastList, $log) {
+    $rootScope.activePage = 'podCast';
+
     var feedUrl = 'http://rss.cnn.com/services/podcasting/sitroom/rss.xml';
 
     $scope.podListButtonUpName = 'Scroll Up';
