@@ -6,19 +6,19 @@
 
 <div class="row">
   <div class="col-lg-6 podVideoListWrap">
-    <a class="podListButton podListButtonUp" ng-click="videoList.moveUp()">{{podListButtonUpName}}</a>
-    <ul class="podVideoList">
-      <li id="video{{$index}}" ng-repeat="video in podCast.entries">
+    <a id="podListButtonUp" href="" class="podListButton podListButtonUp">{{podListButtonUpName}}</a>
+    <ul id="podListVideos" class="podVideoList">
+      <li ng-repeat="video in podCast.entries">
         <div class="number">{{$index+1}}</div>
         <strong>{{video.title | limitTo: 90}}{{video.title.length > 90 ? '&hellip;' : ''}}</strong><br>
         <small>{{video.publishedDate | date:'yyyy-MM-dd HH:mm:ss'}}</small>
       </li>
     </ul>
-    <a class="podListButton podListButtonDown" ng-click="videoList.moveUp()">{{podListButtonDownName}}</a>
+    <a id="podListButtonDown" href="" class="podListButton podListButtonDown">{{podListButtonDownName}}</a>
   </div>
 
   <div class="col-lg-6">
-    <video id="podVideoPlayer" class="podVideoPlayer"></video>
+    <audio controls id="podVideoPlayer" class="podVideoPlayer"></audio>
     <div class="podVideoDescription">{{activeVideoDescription}}</div>
   </div>
 </div>

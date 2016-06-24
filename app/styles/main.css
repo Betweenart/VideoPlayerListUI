@@ -59,11 +59,13 @@ h4 {
   cursor: pointer;
 }
 
-.podListButton:hover {
+.podListButton:hover,
+.podListButton:focus {
   background: cornflowerblue;
   border: 1px solid #222;
   color: ghostwhite;
   text-decoration: none;
+  outline: none;
 }
 
 .podListButtonUp {
@@ -85,7 +87,7 @@ h4 {
   color: dimgrey;
   border-left: 1px solid #222;
   border-right: 1px solid #222;
-  height: 378px;
+  height: 364px;
 }
 
 .podVideoList li {
