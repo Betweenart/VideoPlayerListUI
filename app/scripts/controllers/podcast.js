@@ -38,12 +38,17 @@ angular.module('videoPlayerListUiApp')
 
     $scope.activeVideoDescription = 'short description';
 
-    // define video list class
+    /**
+     * Controlls the video list UI scrolling, buttons and playback
+     * @class videoListClass
+     * @type {{init: Function, addListeners: Function, moveListUp: Function, moveListDown: Function, selectVideo: Function, deselectVideo: Function, selectVideoUp: Function, selectVideoDown: Function, playVideo: Function, updateDescription: Function}}
+     */
     var videoListClass = {
       init: function (buttonUpId, buttonDownId, listId, videoEntries, playerId) {
-        if (!buttonUpId || !buttonDownId || !listId) {
-          return console.warn('missing list id\'s');
+        if (!buttonUpId || !buttonDownId || !listId || !videoEntries || !playerId) {
+          return console.warn('missing parameters');
         }
+
         this.entries = videoEntries || [];
         this.buttonUp = $('#' + buttonUpId);
         this.buttonDown = $('#' + buttonDownId);
@@ -159,6 +164,10 @@ angular.module('videoPlayerListUiApp')
       },
       playVideo: function () {
         console.log('playVideo');
+        if (!this.player) {
+          return console.warn('missing player');
+        }
+
         if (this.playing === this.selected) {
           if (this.player[0].paused) {
             this.player[0].play();

@@ -30,4 +30,16 @@ angular.module('videoPlayerListUiApp')
       'JS Hint',
       'Karma'
     ];
+
+    $scope.keys = [
+      'Enter = Play/Pause',
+      'Space = Move according to selected button',
+      'Arrow Up = Move Up/Change Buttons',
+      'Arrow Down = Move Down/Change Buttons'
+    ];
+
+    $scope.todos = [
+      'Add dynamic UL height',
+      'Write smart method for moving list up/down, element group visible x 4'
+    ];
   });
