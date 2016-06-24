@@ -10,9 +10,9 @@
 angular.module('videoPlayerListUiApp')
   .service('PodCastList', function (PodCastFeed, $q) {
     return {
-      get: function (URL) {
+      get: function (URL, maxCount) {
         var defer = $q.defer();
-        PodCastFeed.fetch({q: URL, num: 10}, {}, function (data) {
+        PodCastFeed.fetch({q: URL, num: maxCount}, {}, function (data) {
           defer.resolve(data);
         });
         return defer.promise;

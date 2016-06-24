@@ -11,14 +11,15 @@ angular.module('videoPlayerListUiApp')
   .controller('PodCastCtrl', function ($rootScope, $scope, PodCastList, $log) {
     $rootScope.activePage = 'podCast';
 
-    var feedUrl = 'http://rss.cnn.com/services/podcasting/sitroom/rss.xml';
+    var feedUrl = 'http://rss.cnn.com/services/podcasting/sitroom/rss.xml',
+      maxCount = 10;
 
     $scope.podListButtonUpName = 'Move Up';
     $scope.podListButtonDownName = 'Move Down';
     $scope.podCast = null;
 
     // get feed from wherever we need
-    PodCastList.get(feedUrl).then(function (data) {
+    PodCastList.get(feedUrl, maxCount).then(function (data) {
       $scope.podCast = data.responseData.feed;
 
       // parse date for display filter
