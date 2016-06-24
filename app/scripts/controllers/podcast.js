@@ -59,7 +59,7 @@ angular.module('videoPlayerListUiApp')
         this.visibleElements = 4;
 
         this.playing = null;
-        this.player = $('#' + playerId);
+        this.player = angular.element(document.getElementById(playerId));
 
         this.selected = 0;
         this.buttonUp.focus();
