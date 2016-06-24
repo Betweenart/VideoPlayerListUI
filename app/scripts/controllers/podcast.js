@@ -50,9 +50,9 @@ angular.module('videoPlayerListUiApp')
         }
 
         this.entries = videoEntries || [];
-        this.buttonUp = $('#' + buttonUpId);
-        this.buttonDown = $('#' + buttonDownId);
-        this.podList = $('#' + listId);
+        this.buttonUp = angular.element(document.getElementById(buttonUpId));
+        this.buttonDown = angular.element(document.getElementById(buttonDownId));
+        this.podList = angular.element(document.getElementById(listId));
         this.videosList = this.podList.find('li');
         this.firstElement = this.videosList[0];
         this.elHeight = this.firstElement.offsetHeight;
