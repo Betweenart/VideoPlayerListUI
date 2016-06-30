@@ -17,12 +17,12 @@ http://betweenart.co.uk/podCastFeed/
 
 ## Instruction
 **Keys:**
-Up Arrow - moves list up
-Down Arrow - moves list down
-SpaceBar - moves list to direction of currently selected button
-Enter - plays the selected video (pauses if is already playing)
+- Up Arrow - moves list up
+- Down Arrow - moves list down
+- SpaceBar - moves list to direction of currently selected button
+- Enter - plays the selected video (pauses if is already playing)
 
-**Usage**
-Upload all files from dist folder or unpack from distApp.zip file to any server e.g. Apache.
-No special requirements besides javascript ;)
-Enjoy!
+**Usage:**<br>
+Upload all files from dist folder or unpack from distApp.zip file to any server e.g. Apache.<br>
+No special requirements besides javascript ;)<br>
+*Enjoy!*
