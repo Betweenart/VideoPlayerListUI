@@ -55,8 +55,9 @@ angular.module('videoPlayerListUiApp')
         this.podList = angular.element(document.getElementById(listId));
         this.videosList = this.podList.find('li');
         this.firstElement = this.videosList[0];
-        this.elHeight = this.firstElement.offsetHeight;
-        this.visibleElements = 4;
+        this.elementHeight = this.firstElement.offsetHeight; // height for movement math
+        this.visibleElements = 4; // how many fully displayed elements are in the list -> this.perListPage
+        this.topVisible = 0; // top element for movement behaviour
 
         this.playing = null;
         this.player = angular.element(document.getElementById(playerId));
@@ -70,7 +71,7 @@ angular.module('videoPlayerListUiApp')
         var _this = this;
         this.buttonUp.on('keydown', function (event) {
           event.preventDefault();
-          console.log(event.keyCode);
+
           switch (event.keyCode) {
             case 13:
               _this.playVideo();
@@ -89,7 +90,7 @@ angular.module('videoPlayerListUiApp')
 
         this.buttonDown.on('keydown', function (event) {
           event.preventDefault();
-          console.log(event.keyCode);
+
           switch (event.keyCode) {
             case 13:
               _this.playVideo();
@@ -108,38 +109,57 @@ angular.module('videoPlayerListUiApp')
 
       },
       moveListUp: function () {
-        console.log('up', this.selected);
+        console.log('moving up to:' + this.selected - 1);
+
         if (this.selected === 0) {
           return console.info('first element');
         }
 
-        if (this.selected === 1) {
-          this.firstElement.style.marginTop = '0px';
-        } else if (this.selected === this.videosList.length - 1) { // last element
-          this.firstElement.style.marginTop = (parseInt(this.firstElement.style.marginTop, 10) + this.elHeight / 3) + 'px';
-        } else if (this.selected === this.videosList.length - 2 || this.selected === this.videosList.length - 3) {
-          // only select up
-        } else {
-          this.firstElement.style.marginTop = (parseInt(this.firstElement.style.marginTop, 10) + this.elHeight) + 'px';
+        if (this.videosList.length <= this.visibleElements) {
+          return;
         }
 
+        var currentMargin = parseInt(this.firstElement.style.marginTop, 10);
+
+        if (this.selected === 1) { // moves to first element
+          this.firstElement.style.marginTop = '0px';
+          this.topVisible = 0;
+        }
+        else if (this.selected === this.topVisible + 1) {
+          this.firstElement.style.marginTop = (currentMargin + this.elementHeight) + 'px';
+          this.topVisible -= 1;
+        }
+        else if (this.selected === this.videosList.length - 1) { // last element
+          this.firstElement.style.marginTop = (currentMargin + this.elementHeight / 3) + 'px';
+          this.topVisible -= 1;
+        }
         this.selectVideoUp();
       },
       moveListDown: function () {
-        console.log('down', this.selected);
+        console.log('moving down to:' + this.selected + 1);
+
         if (this.selected === this.videosList.length - 1) { // last element
           return console.info('last element');
         }
 
-        if (this.selected === 0 || this.selected === 1 || this.selected === 2) {
-          //just select
-        } else if (this.selected === 3) {
-          this.firstElement.style.marginTop = -(this.elHeight + (this.elHeight / 3)) + 'px';
-        } else if (this.selected === this.videosList.length - 2) {
-          this.firstElement.style.marginTop = -((this.videosList.length - this.visibleElements) * this.elHeight) + this.elHeight / 3 + 'px';
-        } else {
-          this.firstElement.style.marginTop = (parseInt(this.firstElement.style.marginTop, 10) - this.elHeight) + 'px';
+        var currentMargin = parseInt(this.firstElement.style.marginTop, 10);
+
+        if (this.selected === this.visibleElements - 1 && this.topVisible === 0) { // first move of margin
+          console.log('first move down');
+          this.firstElement.style.marginTop = -(this.elementHeight + (this.elementHeight / 3)) + 'px';
+          this.topVisible += 1;
         }
+        else if (this.selected === this.videosList.length - 2) { // to last element
+          console.log('last move down');
+          this.firstElement.style.marginTop = -((this.videosList.length - this.visibleElements) * this.elementHeight) + this.elementHeight / 3 + 'px';
+          this.topVisible += 1;
+        }
+        else if (this.selected === this.topVisible + this.visibleElements - 1) {
+          console.log('full move down');
+          this.firstElement.style.marginTop = (currentMargin - this.elementHeight) + 'px';
+          this.topVisible += 1;
+        }
+
         this.selectVideoDown();
       },
       selectVideo: function () {
@@ -188,5 +208,5 @@ angular.module('videoPlayerListUiApp')
         $scope.$apply();
       }
     };
-
+    $scope.listCtrl = videoListClass;
   });
