@@ -2,6 +2,10 @@
 
 UI list element controlled with keyboard keys
 
+## Environment preparation
+**requires node for grunt builds**
+Run `npm install` and `bower install` to get all dependencies.
+
 ## Build & development
 Run `grunt build` for building and `grunt serve` for preview.
 
