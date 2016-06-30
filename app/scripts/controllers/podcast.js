@@ -41,7 +41,7 @@ angular.module('videoPlayerListUiApp')
     /**
      * Controlls the video list UI scrolling, buttons and playback
      * @class videoListClass
-     * @type {{init: Function, addListeners: Function, moveListUp: Function, moveListDown: Function, selectVideo: Function, deselectVideo: Function, selectVideoUp: Function, selectVideoDown: Function, playVideo: Function, updateDescription: Function}}
+     * @type {{init: Function, addListeners: Function, moveListUp: Function, moveListDown: Function, selectVideo: Function, deselectVideo: Function, selectVideoUp: Function, selectVideoDown: Function, playPodCast: Function, updateDescription: Function}}
      */
     var videoListClass = {
       init: function (buttonUpId, buttonDownId, listId, videoEntries, playerId) {
@@ -67,6 +67,10 @@ angular.module('videoPlayerListUiApp')
         this.selectVideo(this.selected);
         this.addListeners();
       },
+      /**
+       * Ads main button listeners, checks for keyChar number and acts accordingly
+       * @method addListeners
+       */
       addListeners: function () {
         var _this = this;
         this.buttonUp.on('keydown', function (event) {
@@ -74,13 +78,14 @@ angular.module('videoPlayerListUiApp')
 
           switch (event.keyCode) {
             case 13:
-              _this.playVideo();
+              _this.playPodCast();
               break;
             case 38:
             case 32:
               _this.moveListUp();
               break;
             case 40:
+              _this.moveListDown();
               _this.buttonDown.focus();
               break;
             default:
@@ -93,9 +98,10 @@ angular.module('videoPlayerListUiApp')
 
           switch (event.keyCode) {
             case 13:
-              _this.playVideo();
+              _this.playPodCast();
               break;
             case 38:
+              _this.moveListUp();
               _this.buttonUp.focus();
               break;
             case 40:
@@ -108,6 +114,10 @@ angular.module('videoPlayerListUiApp')
         });
 
       },
+      /**
+       * Moves the list up and selects the next list element
+       * @method moveListUp
+       */
       moveListUp: function () {
         console.log('moving up to:' + this.selected - 1);
 
@@ -135,6 +145,10 @@ angular.module('videoPlayerListUiApp')
         }
         this.selectVideoUp();
       },
+      /**
+       * Moves the list Down and selects the next list element
+       * @method moveListDown
+       */
       moveListDown: function () {
         console.log('moving down to:' + this.selected + 1);
 
@@ -162,28 +176,48 @@ angular.module('videoPlayerListUiApp')
 
         this.selectVideoDown();
       },
+      /**
+       * Shorthand for adding an active class from a list element
+       * @method selectVideo
+       */
       selectVideo: function () {
         if (this.videosList && this.videosList.length > 0) {
           this.videosList[this.selected].classList.add('active');
         }
       },
+      /**
+       * Shorthand for removing an active class from a list element
+       * @method selectVideo
+       */
       deselectVideo: function () {
         if (this.videosList && this.videosList.length > 0) {
           this.videosList[this.selected].classList.remove('active');
         }
       },
+      /**
+       * Changing selection of video when moving up the list
+       * @method selectVideoUp
+       */
       selectVideoUp: function () {
         this.deselectVideo();
         this.selected -= 1;
         this.selectVideo();
       },
+      /**
+       * Changing selection of video when moving down the list
+       * @method selectVideoDown
+       */
       selectVideoDown: function () {
         this.deselectVideo();
         this.selected += 1;
         this.selectVideo();
       },
-      playVideo: function () {
-        console.log('playVideo');
+      /**
+       * Playing the currently selected PodCast from list element
+       * @method playPodCast
+       */
+      playPodCast: function () {
+        console.log('playPodCast');
         if (!this.player) {
           return console.warn('missing player');
         }
@@ -203,10 +237,15 @@ angular.module('videoPlayerListUiApp')
 
         this.updateDescription();
       },
+      /**
+       * Updates the PodCast description tekst
+       * @method updateDescription
+       */
       updateDescription: function () {
         $scope.activeVideoDescription = this.entries[this.selected].contentSnippet;
         $scope.$apply();
       }
     };
+
     $scope.listCtrl = videoListClass;
   });

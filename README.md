@@ -1,19 +1,19 @@
-# video-player-list-ui
+# RSS PodCast Feed with Player
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+UI list element controlled with keyboard keys
 
 ## Build & development
-
-Run `grunt` for building and `grunt serve` for preview.
+Run `grunt build` for building and `grunt serve` for preview.
 
 ## Testing
-
 Running `grunt test` will run the unit tests with karma.
 
 ## Demo Page:
 http://betweenart.co.uk/podCastFeed/
 
-## TODO
-Add dynamic UL height
-Write smart method for moving list up/down, element group visible x 4
+## Instruction
+**Keys:**
+Up Arrow - moves list up
+Down Arrow - moves list down
+SpaceBar - moves list to direction of currently selected button
+Enter - plays the selected video (pauses if is already playing)
