@@ -11,15 +11,18 @@ angular.module('videoPlayerListUiApp')
   .controller('PodCastCtrl', function ($rootScope, $scope, PodCastList) {
     $rootScope.activePage = 'podCast';
 
-    var feedUrl = 'http://rss.cnn.com/services/podcasting/sitroom/rss.xml',
-      maxCount = 12; // max amount of pod casts to retrieve
+    /**
+     * Main Feed Settings
+     */
+    $scope.feedUrl = 'http://rss.cnn.com/services/podcasting/sitroom/rss.xml';
+    $scope.feedsMaxCount = 12; // max amount of pod casts to retrieve
 
     $scope.podListButtonUpName = 'Move Up';
     $scope.podListButtonDownName = 'Move Down';
     $scope.podCast = null;
 
     // get feed from wherever we need
-    PodCastList.get(feedUrl, maxCount).then(function (data) {
+    PodCastList.get($scope.feedUrl, $scope.feedsMaxCount).then(function (data) {
       $scope.podCast = data.responseData.feed;
 
       // parse date for display filter
@@ -31,7 +34,7 @@ angular.module('videoPlayerListUiApp')
 
       // initialise the ui list class
       setTimeout(function () {
-        videoListClass.init('podListButtonUp', 'podListButtonDown', 'podListVideos', $scope.podCast.entries, 'podVideoPlayer', 'podVideoDescription');
+        $scope.listCtrl.init('podListButtonUp', 'podListButtonDown', 'podListVideos', $scope.podCast.entries, 'podVideoPlayer', 'podVideoDescription');
       }, 1);
     });
 
@@ -42,7 +45,7 @@ angular.module('videoPlayerListUiApp')
      * @class videoListClass
      * @type {{init: Function, addListeners: Function, moveListUp: Function, moveListDown: Function, selectVideo: Function, deselectVideo: Function, selectVideoUp: Function, selectVideoDown: Function, playPodCast: Function, updateDescription: Function}}
      */
-    var videoListClass = {
+    $scope.listCtrl = {
       init: function (buttonUpId, buttonDownId, listId, videoEntries, playerId) {
         if (!buttonUpId || !buttonDownId || !listId || !videoEntries || !playerId) {
           return console.warn('missing parameters');
@@ -118,8 +121,6 @@ angular.module('videoPlayerListUiApp')
        * @method moveListUp
        */
       moveListUp: function () {
-        console.log('moving up to:' + this.selected - 1);
-
         if (this.selected === 0) {
           return console.info('first element');
         }
@@ -149,8 +150,6 @@ angular.module('videoPlayerListUiApp')
        * @method moveListDown
        */
       moveListDown: function () {
-        console.log('moving down to:' + this.selected + 1);
-
         if (this.selected === this.videosList.length - 1) { // last element
           return console.info('last element');
         }
@@ -158,17 +157,14 @@ angular.module('videoPlayerListUiApp')
         var currentMargin = parseInt(this.firstElement.style.marginTop, 10);
 
         if (this.selected === this.visibleElements - 1 && this.topVisible === 0) { // first move of margin
-          console.log('first move down');
           this.firstElement.style.marginTop = -(this.elementHeight + (this.elementHeight / 3)) + 'px';
           this.topVisible += 1;
         }
         else if (this.selected === this.videosList.length - 2) { // to last element
-          console.log('last move down');
           this.firstElement.style.marginTop = -((this.videosList.length - this.visibleElements) * this.elementHeight) + this.elementHeight / 3 + 'px';
           this.topVisible += 1;
         }
         else if (this.selected === this.topVisible + this.visibleElements - 1) {
-          console.log('full move down');
           this.firstElement.style.marginTop = (currentMargin - this.elementHeight) + 'px';
           this.topVisible += 1;
         }
@@ -216,7 +212,6 @@ angular.module('videoPlayerListUiApp')
        * @method playPodCast
        */
       playPodCast: function () {
-        console.log('playPodCast');
         if (!this.player) {
           return console.warn('missing player');
         }
@@ -237,7 +232,7 @@ angular.module('videoPlayerListUiApp')
         this.updateDescription();
       },
       /**
-       * Updates the PodCast description tekst
+       * Updates the PodCast description text
        * @method updateDescription
        */
       updateDescription: function () {
@@ -245,6 +240,4 @@ angular.module('videoPlayerListUiApp')
         $scope.$apply();
       }
     };
-
-    $scope.listCtrl = videoListClass;
   });

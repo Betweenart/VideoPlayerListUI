@@ -129,7 +129,6 @@ h4 {
 /* VIDEO PLAYER */
 .podVideoPlayer {
   width: 100%;
-  height: auto;
   background: #111;
 }
 
@@ -138,8 +137,11 @@ h4 {
   background: #111;
   color: lightgray;
   padding: 0.75em 1em;
+  border-radius: 0.375em;
 }
-/* TV App max with for old devices */
+
+/* TV App max width for old devices */
 .container {
   max-width: 1280px;
+  max-height: 720px;
 }
