@@ -8,11 +8,11 @@
  * Controller of the videoPlayerListUiApp
  */
 angular.module('videoPlayerListUiApp')
-  .controller('PodCastCtrl', function ($rootScope, $scope, PodCastList, $log) {
+  .controller('PodCastCtrl', function ($rootScope, $scope, PodCastList) {
     $rootScope.activePage = 'podCast';
 
     var feedUrl = 'http://rss.cnn.com/services/podcasting/sitroom/rss.xml',
-      maxCount = 10;
+      maxCount = 12; // max amount of pod casts to retrieve
 
     $scope.podListButtonUpName = 'Move Up';
     $scope.podListButtonDownName = 'Move Down';
@@ -28,15 +28,14 @@ angular.module('videoPlayerListUiApp')
           $scope.podCast.entries[i].publishedDate = new Date($scope.podCast.entries[i].publishedDate);
         }
       }
-      $log.debug($scope.podCast);
 
-      // initalize the ui class
+      // initialise the ui list class
       setTimeout(function () {
         videoListClass.init('podListButtonUp', 'podListButtonDown', 'podListVideos', $scope.podCast.entries, 'podVideoPlayer', 'podVideoDescription');
       }, 1);
     });
 
-    $scope.activeVideoDescription = 'short description';
+    $scope.activeVideoDescription = 'no description';
 
     /**
      * Controlls the video list UI scrolling, buttons and playback
